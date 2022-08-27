@@ -26,4 +26,5 @@ sealed class BottomNavigationScreens(
     object Settings: BottomNavigationScreens(SETTINGS, R.string.home, Icons.Outlined.Settings)
     object HeightScreen: BottomNavigationScreens("Height", R.string.home, Icons.Outlined.Settings)
     object WeightScreen: BottomNavigationScreens("Weight", R.string.home, Icons.Outlined.Settings)
+    object SpeedometerScreen: BottomNavigationScreens("Speedometer", R.string.home, Icons.Outlined.Settings)
 }

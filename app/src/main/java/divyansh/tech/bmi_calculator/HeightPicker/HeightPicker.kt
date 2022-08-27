@@ -14,6 +14,7 @@ import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
@@ -86,8 +87,8 @@ fun HeightPicker(
                     ) { change, dragAmount ->
                         val newDistance = oldDragPoint + (change.position.y - startDragPoint)
                         targetDistant = newDistance.coerceIn(
-                            minimumValue = (initialHeight * 18 - maxHeightValue * 18).toFloat(),
-                            maximumValue = (initialHeight * 18 - minHeightValue * 18).toFloat()
+                            minimumValue = (initialHeight * 36 - maxHeightValue * 36).toFloat(),
+                            maximumValue = (initialHeight * 36 - minHeightValue * 36).toFloat()
                         )
                     }
                 }
@@ -99,60 +100,73 @@ fun HeightPicker(
                 )
 
                 for (height in minHeightValue..maxHeightValue) {
-                    if ((height % 10 == 0) || (height % 5 == 0)) {
-                        val degreeLineScaleY =
-                            middlePoint.y + (18 * (height - initialHeight.toFloat()) + targetDistant)
-                        val lineType = when {
-                            height % 10 == 0 -> HeightScales.TENSTEPS
-                            height % 5 == 0 -> HeightScales.FIVESTEPS
-                            else -> HeightScales.NORMAL
-                        }
+                    val degreeLineScaleY =
+                        middlePoint.y + (36 * (height - initialHeight.toFloat()) + targetDistant)
+                    val lineType = when {
+                        height % 10 == 0 -> HeightScales.TENSTEPS
+                        height % 5 == 0 -> HeightScales.FIVESTEPS
+                        else -> HeightScales.NORMAL
+                    }
 
-                        val lineLength = when(lineType) {
-                            HeightScales.TENSTEPS -> style.tenStepCountLength.toPx()
-                            HeightScales.FIVESTEPS -> style.fiveStepCountLength.toPx()
-                            else -> 10.dp.toPx()
-                        }
+                    val lineLength = when(lineType) {
+                        HeightScales.TENSTEPS -> style.tenStepCountLength.toPx()
+                        HeightScales.FIVESTEPS -> style.fiveStepCountLength.toPx()
+                        else -> 35.dp.toPx()
+                    }
 
-                        val start = Offset(
-                            x = 0f + 10.dp.toPx(),
-                            y = degreeLineScaleY
-                        )
+                    val start = Offset(
+                        x = 0f + 10.dp.toPx(),
+                        y = degreeLineScaleY
+                    )
 
-                        val end = Offset(
-                            x = ((maxWidth / 2f).toPx() - lineLength),
-                            y = degreeLineScaleY
-                        )
+                    val end = Offset(
+                        x = ((maxWidth / 2f).toPx() - lineLength),
+                        y = degreeLineScaleY
+                    )
 
-                        drawLine(
-                            start = start,
-                            end = end,
-                            color = style.lineColor,
-                            strokeWidth = 1.dp.toPx()
-                        )
+                    drawLine(
+                        start = start,
+                        end = end,
+                        color = style.lineColor,
+                        strokeWidth = 1.dp.toPx()
+                    )
 
-                        if (abs(middlePoint.y - degreeLineScaleY.roundToInt()) < 5) {
-                            selectedHeight = height
-                            onHeightPicked(selectedHeight)
-                        }
 
-                        if (height % 20 == 0) {
-                            drawContext.canvas.nativeCanvas.apply {
-                                drawText(
-                                    abs(height).toString(),
-                                    maxWidth.toPx() / 2f + 18,
-                                    degreeLineScaleY + 18,
-                                    Paint().apply {
-                                        textSize = if (height == selectedHeight) 24.sp.toPx() else 14.sp.toPx()
-                                        color = android.graphics.Color.BLACK
-                                        textAlign = Paint.Align.CENTER
-                                        typeface = Typeface.DEFAULT_BOLD
-                                    }
-                                )
-                            }
+                    if (abs(middlePoint.y - degreeLineScaleY.roundToInt()) < 5) {
+                        selectedHeight = height
+                        Log.e("HEIGHT -> ", selectedHeight.toString())
+                        onHeightPicked(selectedHeight)
+                    }
+
+                    if (height % 20 == 0) {
+                        drawContext.canvas.nativeCanvas.apply {
+                            drawText(
+                                abs(height).toString(),
+                                maxWidth.toPx() / 2f + 18,
+                                degreeLineScaleY + 18,
+                                Paint().apply {
+                                    textSize = if (height == selectedHeight) 24.sp.toPx() else 18.sp.toPx()
+                                    color = android.graphics.Color.BLACK
+                                    textAlign = Paint.Align.CENTER
+                                    typeface = Typeface.DEFAULT_BOLD
+                                }
+                            )
                         }
                     }
                 }
+
+                drawLine(
+                    start = Offset(
+                        x = middlePoint.x + 45.dp.toPx(),
+                        y = middlePoint.y
+                    ),
+                    end = Offset(
+                        x = maxWidth.toPx(),
+                        y = middlePoint.y
+                    ),
+                    color = Color.Blue,
+                    strokeWidth = 2.dp.toPx()
+                )
             }
         }
     }
@@ -163,5 +177,5 @@ fun HeightPicker(
 fun ShowHeightPicker() {
     HeightPicker(modifier = Modifier
         .fillMaxHeight()
-        .width(400.dp), onHeightPicked = {})
+        .width(140.dp), onHeightPicked = {})
 }

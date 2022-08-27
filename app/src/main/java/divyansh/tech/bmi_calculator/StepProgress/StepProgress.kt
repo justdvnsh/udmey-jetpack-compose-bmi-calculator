@@ -3,16 +3,20 @@ package divyansh.tech.bmi_calculator.StepProgress
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -30,26 +34,26 @@ fun StepsProgressBar(
 }
 
 @Composable
-fun RowScope.Step(modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun RowScope.Step(
+    modifier: Modifier = Modifier,
+    selected: Boolean,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    onClick: () -> Unit
+) {
 
-    var isComplete by remember {
-        mutableStateOf(false)
-    }
-    var isCurrent by remember {
-        mutableStateOf(true)
-    }
+    val color = if (selected) MaterialTheme.colors.primary else Color.LightGray
+    val innerCircleColor = if (selected) MaterialTheme.colors.primary else Color.LightGray
 
-    val color = if (isComplete || isCurrent) MaterialTheme.colors.primary else Color.LightGray
-    val innerCircleColor = if (isComplete) MaterialTheme.colors.primary else Color.LightGray
-
-    Box(modifier =
-    modifier
+    val ripple = rememberRipple(bounded = false, color = Color.Transparent)
+    Box(modifier = modifier
+        .selectable(
+            selected = selected,
+            onClick = onClick,
+            role = Role.Tab,
+            interactionSource = interactionSource,
+            indication = ripple
+        )
         .weight(1f)
-        .clickable {
-            isComplete = !isComplete
-            isCurrent = !isCurrent
-            onClick()
-        }
     ) {
 
         //Line

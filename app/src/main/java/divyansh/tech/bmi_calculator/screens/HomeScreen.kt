@@ -1,24 +1,16 @@
 package divyansh.tech.bmi_calculator.screens
 
-import android.widget.Toast
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navigation
-import divyansh.tech.bmi_calculator.NavigationGraph
 import divyansh.tech.bmi_calculator.StepProgress.Step
 import divyansh.tech.bmi_calculator.StepProgress.StepsProgressBar
 import divyansh.tech.bmi_calculator.bottomBar.BottomNavigationScreens
@@ -39,7 +31,8 @@ fun HomeScreen() {
                 StepsProgressBar(
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Step(onClick = {
+                    Step(selected = currentStep >= 1, onClick = {
+                        currentStep = 1
                         navController.navigate(BottomNavigationScreens.HeightScreen.route) {
 
                             navController.graph.startDestinationRoute?.let { screen_route ->
@@ -51,7 +44,8 @@ fun HomeScreen() {
                             restoreState = true
                         }
                     })
-                    Step(onClick = {
+                    Step(selected = currentStep >= 2, onClick = {
+                        currentStep = 2
                         navController.navigate(BottomNavigationScreens.WeightScreen.route) {
 
                             navController.graph.startDestinationRoute?.let { screen_route ->
@@ -63,7 +57,19 @@ fun HomeScreen() {
                             restoreState = true
                         }
                     })
-                    Step(onClick = {})
+                    Step(selected = currentStep >= 3, onClick = {
+                        currentStep = 3
+                        navController.navigate(BottomNavigationScreens.SpeedometerScreen.route) {
+
+                            navController.graph.startDestinationRoute?.let { screen_route ->
+                                popUpTo(screen_route) {
+                                    saveState = true
+                                }
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    })
                 }
 
                 Spacer(modifier = Modifier.padding(vertical = 12.dp))
@@ -82,6 +88,9 @@ fun HomeScreeNavigation(navController: NavHostController) {
         }
         composable(BottomNavigationScreens.WeightScreen.route) {
             WeightScreen()
+        }
+        composable(BottomNavigationScreens.SpeedometerScreen.route) {
+            BMIScreen()
         }
     }
 }

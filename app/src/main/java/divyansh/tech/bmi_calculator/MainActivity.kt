@@ -35,10 +35,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import divyansh.tech.bmi_calculator.AgePicker.NumberPicker
-import divyansh.tech.bmi_calculator.HeightPicker.HeightPicker
-import divyansh.tech.bmi_calculator.WeightPicker.RoundSlider
-import divyansh.tech.bmi_calculator.WeightPicker.WeightScale
 import divyansh.tech.bmi_calculator.bottomBar.BottomNavBar
 import divyansh.tech.bmi_calculator.bottomBar.BottomNavigationScreens
 import divyansh.tech.bmi_calculator.screens.*
@@ -50,7 +46,7 @@ class MainActivity : ComponentActivity() {
         setContent {
 
             val navController = rememberNavController()
-            val bottomNavItems = listOf(BottomNavigationScreens.Home, BottomNavigationScreens.Membership, BottomNavigationScreens.Settings)
+            val bottomNavItems = listOf(BottomNavigationScreens.Home, BottomNavigationScreens.Settings)
             Scaffold(
                 bottomBar = {
                     BottomNavBar(navController, bottomNavItems)
