@@ -2,6 +2,7 @@ package divyansh.tech.bmi_calculator.WeightPicker
 
 import android.graphics.*
 import android.util.Log
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.*
@@ -58,9 +59,10 @@ fun WeightScale(
     BoxWithConstraints(modifier = modifier) {
         Card(
             modifier = Modifier.fillMaxSize(),
-            elevation = 6.dp,
+            elevation = 0.dp,
             backgroundColor = androidx.compose.ui.graphics.Color.White,
-            shape = RoundedCornerShape(10.dp)
+            shape = RoundedCornerShape(10.dp),
+            border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color.LightGray)
         ) {
             Canvas(modifier = Modifier
                 .fillMaxSize()
@@ -144,11 +146,12 @@ fun WeightScale(
                                 (degreeLineScaleX) - textBound.width() / 2,
                                 middlePoint.y - 10.dp.toPx(),
                                 Paint().apply {
-                                    this.textSize = 20.sp.toPx()
+                                    this.textSize = if (weight == selectedWeight) 26.sp.toPx() else 18.sp.toPx()
                                     this.textAlign = Paint.Align.CENTER
                                     this.color = Color.BLACK
                                     this.style = Paint.Style.FILL
                                     this.isAntiAlias = true
+                                    typeface = Typeface.DEFAULT_BOLD
                                 }
                             )
                         }

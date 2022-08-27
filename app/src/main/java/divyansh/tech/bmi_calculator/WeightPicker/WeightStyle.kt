@@ -11,6 +11,6 @@ data class WeightStyle(
     val tenStepCountLength: Dp = 5.dp,
     val fiveStepCountLength: Dp = 25.dp,
     val normalStepCountLength: Dp = 45.dp,
-    val lineColor: Color = Color.Black,
+    val lineColor: Color = Color.LightGray,
     val scaleGap: Dp = 8.dp
 )

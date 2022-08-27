@@ -2,6 +2,10 @@ package divyansh.tech.bmi_calculator.HeightPicker
 
 import android.graphics.Paint
 import android.graphics.Typeface
+import android.util.Log
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.animation.core.keyframes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -63,12 +67,14 @@ fun HeightPicker(
     BoxWithConstraints(modifier = modifier) {
         Card(
             modifier = Modifier.fillMaxSize(),
-            elevation = 6.dp,
+            elevation = 0.dp,
             backgroundColor = Color.White,
-            shape = RoundedCornerShape(10.dp)
+            shape = RoundedCornerShape(10.dp),
+            border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color.LightGray)
         ) {
             Canvas(modifier =
-            Modifier.fillMaxSize()
+            Modifier
+                .fillMaxSize()
                 .pointerInput(Unit) {
                     detectDragGestures(
                         onDragStart = {
@@ -137,7 +143,7 @@ fun HeightPicker(
                                     maxWidth.toPx() / 2f + 18,
                                     degreeLineScaleY + 18,
                                     Paint().apply {
-                                        textSize = 14.sp.toPx()
+                                        textSize = if (height == selectedHeight) 24.sp.toPx() else 14.sp.toPx()
                                         color = android.graphics.Color.BLACK
                                         textAlign = Paint.Align.CENTER
                                         typeface = Typeface.DEFAULT_BOLD

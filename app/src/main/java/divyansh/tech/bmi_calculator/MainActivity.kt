@@ -1,6 +1,7 @@
 package divyansh.tech.bmi_calculator
 
 import android.os.Bundle
+import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
@@ -12,10 +13,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import divyansh.tech.bmi_calculator.AgePicker.NumberPicker
 import divyansh.tech.bmi_calculator.HeightPicker.HeightPicker
 import divyansh.tech.bmi_calculator.WeightPicker.RoundSlider
 import divyansh.tech.bmi_calculator.WeightPicker.WeightScale
@@ -43,23 +47,53 @@ class MainActivity : ComponentActivity() {
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.Top
                     ) {
-                        HeightPicker(modifier = Modifier
-                            .fillMaxHeight()
-                            .width(140.dp), onHeightPicked = {
-                            height = it
-                        })
+                        Column() {
+                            Text(text = "Height", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp)
+
+                            Spacer(modifier = Modifier.padding(vertical = 10.dp))
+                            
+                            HeightPicker(modifier = Modifier
+                                .fillMaxHeight()
+                                .width(140.dp), onHeightPicked = {
+                                height = it
+                            })
+                        }
 
                         Spacer(modifier = Modifier.padding(horizontal = 12.dp))
 
                         Column(modifier = Modifier.fillMaxHeight()) {
+
+                            Text(text = "Weight", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp)
+
+                            Spacer(modifier = Modifier.padding(vertical = 10.dp))
+
                             WeightScale(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(150.dp), onWeightSelected = {
                                     weight = it
                                 })
-                            Text(text = "HEIGHT :${height}", fontSize = 18.sp)
-                            Text(text = "WEIGHT :${weight}", fontSize = 18.sp)
+//                            Text(text = "HEIGHT :${height}", fontSize = 18.sp)
+//                            Text(text = "WEIGHT :${weight}", fontSize = 18.sp)
+
+                            Spacer(modifier = Modifier.padding(vertical = 10.dp))
+
+                            Text(text = "Age", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
+
+                            Spacer(modifier = Modifier.padding(vertical = 10.dp))
+
+                            NumberPicker(
+                                value = 21,
+                                onValueChange = {},
+                                range = 5..100,
+                            modifier = Modifier.fillMaxWidth(),
+                                dividersColor = Color.LightGray,
+                                textStyle = TextStyle(
+                                    color = Color.Black,
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.ExtraBold
+                                )
+                            )
                         }
                     }
                 }
