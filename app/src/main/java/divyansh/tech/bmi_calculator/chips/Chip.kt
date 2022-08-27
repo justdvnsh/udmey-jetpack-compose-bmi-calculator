@@ -28,7 +28,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import divyansh.tech.bmi_calculator.ui.theme.quickSand
 
 private val BottomNavigationAnimationSpec = TweenSpec<Float>(
     durationMillis = 1000,
@@ -205,7 +207,8 @@ fun SelectedImageChip(
                 modifier = Modifier.padding(horizontal = 8.dp))
             Text(
                 text = text,
-                style = MaterialTheme.typography.body2,
+                fontFamily = quickSand,
+                fontSize = 14.sp,
                 modifier = Modifier.padding(end = 8.dp, top = 8.dp, bottom = 8.dp)
             )
         }

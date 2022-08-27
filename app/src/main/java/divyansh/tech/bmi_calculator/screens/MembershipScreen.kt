@@ -16,8 +16,10 @@ import androidx.compose.ui.unit.dp
 import divyansh.tech.bmi_calculator.R
 
 @Composable
-fun MembershipScreen() {
-    Box {
+fun MembershipScreen(
+    modifier: Modifier = Modifier
+) {
+    Box(modifier = modifier) {
         Image(
             painter = painterResource(id = R.drawable.ic_launcher_background),
             contentDescription = "background",

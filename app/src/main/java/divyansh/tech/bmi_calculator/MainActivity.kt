@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import divyansh.tech.bmi_calculator.AgePicker.NumberPicker
 import divyansh.tech.bmi_calculator.HeightPicker.HeightPicker
@@ -40,9 +41,7 @@ import divyansh.tech.bmi_calculator.WeightPicker.RoundSlider
 import divyansh.tech.bmi_calculator.WeightPicker.WeightScale
 import divyansh.tech.bmi_calculator.bottomBar.BottomNavBar
 import divyansh.tech.bmi_calculator.bottomBar.BottomNavigationScreens
-import divyansh.tech.bmi_calculator.screens.HomeScreen
-import divyansh.tech.bmi_calculator.screens.MembershipScreen
-import divyansh.tech.bmi_calculator.screens.SettingsScreen
+import divyansh.tech.bmi_calculator.screens.*
 import divyansh.tech.bmi_calculator.ui.theme.BMICalculatorTheme
 
 class MainActivity : ComponentActivity() {
@@ -63,113 +62,15 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun Glassmorpshism() {
-    val scrollState = rememberScrollState()
-    Box(
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_launcher_background),
-            contentDescription = "background",
-            modifier = Modifier
-                .fillMaxSize()
-                .blur(7.dp),
-            contentScale = ContentScale.Crop,
-        )
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color(0xDD000000)),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly
-        ) {
-            Column(
-                modifier = Modifier
-                    .padding(top = 40.dp)
-                    .fillMaxHeight()
-                    .verticalScroll(scrollState),
-                verticalArrangement = Arrangement.SpaceEvenly,
-            ) {
-                fullCard(icon = Icons.Rounded.Home, 65, "San Francisco, California")
-                fullCard(icon = Icons.Rounded.Home, 54, "Seattle, Washington")
-                fullCard(icon = Icons.Rounded.Home, 2, "Detroit, Michigan")
 
-            }
-
-        }
-    }
-}
-
-
-@Composable
-fun fullCard(icon: ImageVector, temp: Int, place: String) {
-    var tint = if (icon == Icons.Rounded.Home) {
-        Color(0xFFE9E38C)
-    } else if (icon == Icons.Rounded.Home) {
-        Color(0xFF5CA9E6)
-    } else {
-        Color(0xFFFFFFFF)
-    }
-    Card(
-        modifier = Modifier
-            .padding(vertical = 16.dp)
-            .width(300.dp)
-            .height(325.dp),
-        backgroundColor = Color(0xFFFFFF),
-        border = BorderStroke(1.dp, color = Color(0x25FFFFFF)),
-        elevation = 0.dp,
-        shape = RoundedCornerShape(16.dp)
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .alpha(1f)
-                .blur(
-                    radius = 28.dp,
-                    edgeTreatment = BlurredEdgeTreatment.Unbounded
-                )
-                .background(
-                    Brush.radialGradient(
-                        listOf(
-                            Color(0x12FFFFFF),
-                            Color(0xDFFFFFF),
-                            Color(0x9FFFFFFF)
-
-                        ),
-                        radius = 2200f,
-                        center = Offset.Infinite
-                    )
-                )
-
-
-        ) {
-
-        }
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = "Sunny",
-                modifier = Modifier.size(88.dp),
-                tint = tint
-            )
-            Spacer(modifier = Modifier.padding(vertical = 8.dp))
-            Text(
-                text = "$temp°",
-                style = MaterialTheme.typography.h3
-            )
-            Spacer(modifier = Modifier.padding(vertical = 8.dp))
-            Text(text = place)
-        }
-    }
-}
 
 @Composable
 fun NavigationGraph(navController: NavHostController) {
-    NavHost(navController, startDestination = BottomNavigationScreens.Home.route) {
+    NavHost(
+        navController,
+        startDestination = BottomNavigationScreens.Home.route,
+        modifier = Modifier.fillMaxSize().padding(bottom = 90.dp)
+    ) {
         composable(BottomNavigationScreens.Home.route) {
             HomeScreen()
         }

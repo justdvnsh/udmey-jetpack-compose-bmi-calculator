@@ -24,4 +24,6 @@ sealed class BottomNavigationScreens(
     object Home: BottomNavigationScreens(HOME, R.string.home, Icons.Outlined.Home)
     object Membership: BottomNavigationScreens(MEMBERSHIP, R.string.home, Icons.Outlined.AddCircle)
     object Settings: BottomNavigationScreens(SETTINGS, R.string.home, Icons.Outlined.Settings)
+    object HeightScreen: BottomNavigationScreens("Height", R.string.home, Icons.Outlined.Settings)
+    object WeightScreen: BottomNavigationScreens("Weight", R.string.home, Icons.Outlined.Settings)
 }
