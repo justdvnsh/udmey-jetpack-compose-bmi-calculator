@@ -18,13 +18,16 @@ import androidx.compose.ui.unit.sp
 import divyansh.tech.bmi_calculator.HeightPicker.HeightPicker
 import divyansh.tech.bmi_calculator.WeightPicker.Slider
 import divyansh.tech.bmi_calculator.WeightPicker.rememberSliderState
+import divyansh.tech.bmi_calculator.screens.Home.HomeViewModel
 import divyansh.tech.bmi_calculator.ui.theme.quickSand
 
 @Composable
-fun WeightScreen() {
+fun WeightScreen(
+    homeViewModel: HomeViewModel
+) {
     var weight = rememberSliderState()
 
-    Log.e("WEIGHT STATE -> ", weight.currentValue.toInt().toString())
+    homeViewModel.weight = weight.currentValue.toInt()
     Column(
         modifier = Modifier
         .fillMaxSize(),
@@ -54,10 +57,4 @@ fun WeightScreen() {
             }
         )
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun showWeightScreen() {
-    WeightScreen()
 }

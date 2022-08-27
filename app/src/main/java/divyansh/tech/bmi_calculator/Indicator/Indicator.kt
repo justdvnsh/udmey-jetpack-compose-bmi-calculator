@@ -95,7 +95,7 @@ fun CircularIndicator(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "$receivedValue",
+                text = String.format("%.2f", receivedValue),
                 fontFamily = quickSand,
                 color = animatedBigTextColor,
                 fontSize = fontSize,

@@ -17,14 +17,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import divyansh.tech.bmi_calculator.HeightPicker.HeightPicker
 import divyansh.tech.bmi_calculator.R
+import divyansh.tech.bmi_calculator.screens.Home.HomeViewModel
 import divyansh.tech.bmi_calculator.ui.theme.quickSand
 
 @Composable
-fun HeightScreen() {
-
-    var height by remember {
-        mutableStateOf(0)
-    }
+fun HeightScreen(
+    homeViewModel: HomeViewModel
+) {
 
     BoxWithConstraints() {
         val maxHeight = maxHeight
@@ -37,7 +36,7 @@ fun HeightScreen() {
             HeightPicker(modifier = Modifier
                 .fillMaxHeight()
                 .width(160.dp), onHeightPicked = {
-                height = it
+                homeViewModel.height = it
             })
 
             Column(
@@ -47,7 +46,7 @@ fun HeightScreen() {
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Height $height",
+                    text = "Height ${homeViewModel.height}",
                     fontFamily = quickSand,
                     fontWeight = FontWeight.Bold,
                     fontSize = 46.sp,
@@ -63,10 +62,4 @@ fun HeightScreen() {
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun showHeightScreen() {
-    HeightScreen()
 }
