@@ -1,10 +1,7 @@
 package divyansh.tech.bmi_calculator.screens
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Done
 import androidx.compose.runtime.Composable
@@ -69,7 +66,7 @@ fun HomeScreen(
                     Icon(imageVector = Icons.Outlined.Done, contentDescription = "")
                 }
             }
-        }
+        },
     ) {
         Box(modifier = Modifier
             .fillMaxSize()
